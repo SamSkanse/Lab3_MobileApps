@@ -9,7 +9,7 @@
 import UIKit
 import CoreMotion
 
-class ViewController: UIViewController  {
+class ViewControllerPD: UIViewController  {
     
     let motionModel = MotionModel()
 
@@ -35,7 +35,7 @@ class ViewController: UIViewController  {
 
 }
 
-extension ViewController: MotionDelegate{
+extension ViewControllerPD: MotionDelegate{
     // MARK: =====Motion Delegate Methods=====
     
     func activityUpdated(activity:CMMotionActivity){
