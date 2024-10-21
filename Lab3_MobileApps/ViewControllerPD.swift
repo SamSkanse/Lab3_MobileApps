@@ -17,6 +17,7 @@ class ViewControllerPD: UIViewController  {
     @IBOutlet weak var activityLabel: UILabel!
     @IBOutlet weak var debugLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var gameButton: UIButton!
     
     // MARK: =====UI Lifecycle=====
     override func viewDidLoad() {
