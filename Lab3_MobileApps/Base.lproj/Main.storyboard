@@ -41,23 +41,44 @@
                                     <segue destination="OB0-5u-w3R" kind="show" id="yWI-U9-9RR"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ek2-Xc-xXn">
+                                <rect key="frame" x="64" y="223" width="268" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rpl-nU-vgh">
+                                <rect key="frame" x="64" y="151" width="268" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Y5D-ZP-NTU">
+                                <rect key="frame" x="64" y="350" width="268" height="4"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="PWy-Qj-BNG"/>
                     <connections>
+                        <outlet property="activityLabel" destination="Rpl-nU-vgh" id="7EQ-hP-0BK"/>
+                        <outlet property="debugLabel" destination="ek2-Xc-xXn" id="ObX-Hg-MB3"/>
                         <outlet property="gameButton" destination="OJg-V7-zio" id="60C-Em-xzb"/>
+                        <outlet property="progressBar" destination="Y5D-ZP-NTU" id="1gu-q6-BDT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-71" y="-680"/>
+            <point key="canvasLocation" x="-72.51908396946564" y="-680.28169014084506"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="Lfv-CB-n18">
             <objects>
-                <viewController id="OB0-5u-w3R" customClass="GameViewController" customModule="Commotion" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="OB0-5u-w3R" customClass="GameViewController" customModule="Lab3_MobileApps" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="42g-ZE-dMN"/>
                         <viewControllerLayoutGuide type="bottom" id="xe3-fM-ioO"/>
