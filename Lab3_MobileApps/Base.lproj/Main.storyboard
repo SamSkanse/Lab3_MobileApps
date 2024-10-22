@@ -38,7 +38,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Game"/>
                                 <connections>
-                                    <segue destination="d9m-KR-Va4" kind="show" id="D4L-du-gU3"/>
+                                    <segue destination="OB0-5u-w3R" kind="show" id="yWI-U9-9RR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -54,21 +54,25 @@
             </objects>
             <point key="canvasLocation" x="-71" y="-680"/>
         </scene>
-        <!--ModuleB View Controller-->
-        <scene sceneID="zhY-te-uaj">
+        <!--Game View Controller-->
+        <scene sceneID="Lfv-CB-n18">
             <objects>
-                <viewController id="d9m-KR-Va4" customClass="ModuleBViewController" customModule="Lab3_MobileApps" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="7Z6-zR-32a">
+                <viewController id="OB0-5u-w3R" customClass="GameViewController" customModule="Commotion" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="42g-ZE-dMN"/>
+                        <viewControllerLayoutGuide type="bottom" id="xe3-fM-ioO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="su2-jX-ebh" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="F5c-aN-J1C"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="dN5-Wo-Rwt"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="dHU-Or-XMs"/>
+                    <navigationItem key="navigationItem" id="gqr-s8-GOt"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="khy-Oz-7C4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q2h-97-NCs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-73" y="118"/>
+            <point key="canvasLocation" x="-73" y="108"/>
         </scene>
     </scenes>
     <resources>
