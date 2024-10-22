@@ -17,40 +17,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="g5P-eH-50t" kind="relationship" relationship="rootViewController" id="DKJ-q1-arv"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="oiw-Me-WXx"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qob-LD-dqJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1010" y="-680"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="bYD-t1-GmO">
-            <objects>
-                <viewController id="g5P-eH-50t" customClass="ViewController" customModule="Lab3_MobileApps" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="hh1-TZ-9fm">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGh-vv-xhx">
-                                <rect key="frame" x="31" y="343" width="330" height="166"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="Enter App"/>
-                                <connections>
-                                    <action selector="appButtonTapped:" destination="g5P-eH-50t" eventType="touchUpInside" id="W3H-PC-kaY"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="3Cx-sI-42n"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="PtW-c4-83f"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="aj0-Lq-tFY"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oAl-xu-1uE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-48" y="-680"/>
         </scene>
         <!--View ControllerPD-->
         <scene sceneID="tne-QT-ifu">
@@ -80,7 +52,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-48" y="137"/>
+            <point key="canvasLocation" x="-71" y="-680"/>
         </scene>
         <!--ModuleB View Controller-->
         <scene sceneID="zhY-te-uaj">
@@ -96,7 +68,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khy-Oz-7C4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1010" y="137"/>
+            <point key="canvasLocation" x="-73" y="118"/>
         </scene>
     </scenes>
     <resources>
