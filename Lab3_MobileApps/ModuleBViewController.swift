@@ -1,4 +1,15 @@
 /*
+ 
+NOTES/IDEAS:
+ 
+ Asteroid comes in at different angles with:
+ randomized rotation (of image)
+ randomized size
+ speed is (num secs survived * constant)
+ 
+ ship is controlled by gyro
+ 
+ 
 
 //
 //  ModuleBViewController.swift
