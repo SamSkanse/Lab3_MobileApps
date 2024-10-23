@@ -212,18 +212,19 @@ extension ViewControllerPD: MotionDelegate {
         }
     }
 
-    func pedometerUpdated(pedData: CMPedometerData) {
+    func pedometerUpdated(pedData: CMPedometerData, stepsToNow: Int) {
         DispatchQueue.main.async {
+            var todayTotalSteps = pedData.numberOfSteps.intValue + stepsToNow
             // Update steps today label
-            self.stepsTodayLabel.text = "Steps Today: \(pedData.numberOfSteps)"
+            self.stepsTodayLabel.text = "Steps Today: \(todayTotalSteps)"
 
             // Update progress bar safely
             if self.numStepsGoal > 0 {
-                let progress = pedData.numberOfSteps.floatValue / self.numStepsGoal
+                let progress = Float(todayTotalSteps) / self.numStepsGoal
                 self.progressBar.progress = min(progress, 1.0) // Ensure progress doesn't exceed 1.0
 
                 // Update steps remaining
-                let stepsRemaining = max(0, Int(self.numStepsGoal) - pedData.numberOfSteps.intValue)
+                let stepsRemaining = max(0, Int(self.numStepsGoal) - todayTotalSteps)
                 self.stepsRemainingLabel.text = "Steps Remaining: \(stepsRemaining)"
             } else {
                 self.progressBar.progress = 0.0

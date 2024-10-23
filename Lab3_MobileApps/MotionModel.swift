@@ -4,7 +4,7 @@ import CoreMotion
 protocol MotionDelegate {
     // Define delegate functions
     func activityUpdated(activity: CMMotionActivity)
-    func pedometerUpdated(pedData: CMPedometerData)
+    func pedometerUpdated(pedData: CMPedometerData, stepsToNow: Int)
     func stepsYesterdayUpdated(steps: Int) // New delegate method
 }
 
@@ -38,11 +38,15 @@ class MotionModel {
         // Check if pedometer is available
         if CMPedometer.isStepCountingAvailable() {
             // Start updating the pedometer from the current date and time
+            let calendar = Calendar.current
+            let now = Date()
+            let startOfToday = calendar.startOfDay(for: now)
+            var stepsToday = queryStepsToday(from: startOfToday, to: now)
             pedometer.startUpdates(from: Date()) { (pedData: CMPedometerData?, error: Error?) in
                 // If no errors, update the delegate
                 if let unwrappedPedData = pedData,
                    let delegate = self.delegate {
-                    delegate.pedometerUpdated(pedData: unwrappedPedData)
+                    delegate.pedometerUpdated(pedData: unwrappedPedData, stepsToNow: stepsToday)
                 }
             }
         }
@@ -64,6 +68,22 @@ class MotionModel {
                 }
             }
         }
+    }
+    
+    func queryStepsToday(from startDate: Date, to endDate: Date) -> Int{
+        var steps = 0
+        if CMPedometer.isStepCountingAvailable() {
+            pedometer.queryPedometerData(from: startDate, to: endDate) { [weak self] (data, error) in
+                if let error = error {
+                    print("Error querying steps: \(error.localizedDescription)")
+                } else if let data = data,
+                          let delegate = self?.delegate {
+                    steps = data.numberOfSteps.intValue
+                    
+                }
+            }
+        }
+        return steps
     }
 }
 
