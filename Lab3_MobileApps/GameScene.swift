@@ -159,11 +159,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func calculateSpawnDelay() -> TimeInterval {
         // Define minimum and maximum spawn intervals
-        let minSpawnInterval: TimeInterval = 0.25  // Minimum delay between spawns
-        let maxSpawnInterval: TimeInterval = 1.25  // Faster initial spawn rate
+        let minSpawnInterval: TimeInterval = 0.1  // Minimum delay between spawns
+        let maxSpawnInterval: TimeInterval = 1.5 // slower initial spawn rate
 
         // Define how quickly the spawn rate should increase
-        let timeToReachMinInterval: TimeInterval = 35.0  // Time in seconds to reach minimum interval
+        let timeToReachMinInterval: TimeInterval = 120.0  // Time in seconds to reach minimum interval
 
         // Calculate the proportion of time elapsed
         let timeElapsed = survivalTime
@@ -202,11 +202,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func calculateAsteroidSpeed() -> TimeInterval {
         // Define minimum and maximum durations for asteroid movement
-        let minDuration: TimeInterval = 0.5 // Faster asteroids
-        let maxDuration: TimeInterval = 7.0  // Slower asteroids at the start
+        let minDuration: TimeInterval = 0.8 // Faster asteroids
+        let maxDuration: TimeInterval = 6.0  // Slower asteroids at the start
 
         // Define how quickly the asteroid speed increases
-        let timeToReachMinDuration: TimeInterval = 60.0  // Time in seconds to reach minimum duration
+        let timeToReachMinDuration: TimeInterval = 120.0  // Time in seconds to reach minimum duration
 
         // Calculate the proportion of time elapsed
         let timeElapsed = survivalTime
