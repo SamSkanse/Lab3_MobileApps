@@ -33,65 +33,59 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OJg-V7-zio">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OJg-V7-zio">
                                 <rect key="frame" x="41" y="674" width="311" height="124"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="124" id="DBH-Qe-Pvv"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Game"/>
                                 <connections>
                                     <segue destination="OB0-5u-w3R" kind="show" identifier="showGameSegue" id="ncq-54-gwy"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Steps Today" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ek2-Xc-xXn">
-                                <rect key="frame" x="62" y="156" width="268" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Y5D-ZP-NTU">
-                                <rect key="frame" x="62" y="506" width="268" height="4"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Y5D-ZP-NTU">
+                                <rect key="frame" x="62" y="485" width="268" height="4"/>
                             </progressView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Activity Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rpl-nU-vgh">
-                                <rect key="frame" x="62" y="103" width="268" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Steps Yesterday" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nP9-cm-SAC">
-                                <rect key="frame" x="93" y="195" width="207" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="evq-ne-EPx">
-                                <rect key="frame" x="41" y="258" width="289" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="evq-ne-EPx">
+                                <rect key="frame" x="52" y="258" width="289" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uzc-TW-HLj">
-                                <rect key="frame" x="41" y="310" width="289" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uzc-TW-HLj">
+                                <rect key="frame" x="52" y="300" width="289" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Set Goal"/>
                                 <connections>
                                     <action selector="setGoalButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ph7-89-pyJ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Goal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRv-2b-3wn">
-                                <rect key="frame" x="56" y="370" width="259" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Goal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRv-2b-3wn">
+                                <rect key="frame" x="67" y="436" width="259" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Steps Remaining:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xbz-Sq-c8N">
-                                <rect key="frame" x="93" y="534" width="207" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Steps Remaining:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xbz-Sq-c8N">
+                                <rect key="frame" x="93" y="520" width="207" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Activity Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rpl-nU-vgh">
+                                <rect key="frame" x="62" y="118" width="268" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Steps Today" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ek2-Xc-xXn">
+                                <rect key="frame" x="62" y="378" width="268" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Steps Yesterday" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nP9-cm-SAC">
+                                <rect key="frame" x="93" y="188" width="207" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -99,6 +93,32 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="evq-ne-EPx" firstAttribute="centerX" secondItem="ek2-Xc-xXn" secondAttribute="centerX" id="2Nz-Os-efI"/>
+                            <constraint firstItem="Rpl-nU-vgh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="22" id="7U8-UJ-LXs"/>
+                            <constraint firstItem="IRv-2b-3wn" firstAttribute="top" secondItem="ek2-Xc-xXn" secondAttribute="bottom" constant="37" id="7cl-iV-mQl"/>
+                            <constraint firstItem="evq-ne-EPx" firstAttribute="centerX" secondItem="nP9-cm-SAC" secondAttribute="centerX" id="7lc-xq-uIy"/>
+                            <constraint firstItem="Rpl-nU-vgh" firstAttribute="trailing" secondItem="Y5D-ZP-NTU" secondAttribute="trailing" id="8Vr-m5-GNR"/>
+                            <constraint firstItem="ek2-Xc-xXn" firstAttribute="top" secondItem="Uzc-TW-HLj" secondAttribute="bottom" constant="43" id="9Iw-qn-eKQ"/>
+                            <constraint firstItem="Rpl-nU-vgh" firstAttribute="leading" secondItem="Y5D-ZP-NTU" secondAttribute="leading" id="9J9-Mm-u6m"/>
+                            <constraint firstItem="evq-ne-EPx" firstAttribute="leading" secondItem="Uzc-TW-HLj" secondAttribute="leading" id="KKr-QY-GSF"/>
+                            <constraint firstItem="Y5D-ZP-NTU" firstAttribute="top" secondItem="IRv-2b-3wn" secondAttribute="bottom" constant="28" id="NK4-Ut-ZeG"/>
+                            <constraint firstItem="xbz-Sq-c8N" firstAttribute="top" secondItem="Y5D-ZP-NTU" secondAttribute="bottom" constant="31" id="Oa2-8b-VmP"/>
+                            <constraint firstItem="Uzc-TW-HLj" firstAttribute="top" secondItem="evq-ne-EPx" secondAttribute="bottom" constant="8" id="OtZ-c1-iA1"/>
+                            <constraint firstItem="Rpl-nU-vgh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="62" id="Q9x-EX-ska"/>
+                            <constraint firstItem="nP9-cm-SAC" firstAttribute="top" secondItem="Rpl-nU-vgh" secondAttribute="bottom" constant="40" id="TmH-Dl-uJ0"/>
+                            <constraint firstItem="Rpl-nU-vgh" firstAttribute="centerX" secondItem="xbz-Sq-c8N" secondAttribute="centerX" id="Unu-pH-Opp"/>
+                            <constraint firstItem="Rpl-nU-vgh" firstAttribute="trailing" secondItem="evq-ne-EPx" secondAttribute="trailing" id="Yi0-yC-8Eg"/>
+                            <constraint firstItem="ek2-Xc-xXn" firstAttribute="leading" secondItem="Y5D-ZP-NTU" secondAttribute="leading" id="YlX-v7-hkn"/>
+                            <constraint firstItem="Rpl-nU-vgh" firstAttribute="centerX" secondItem="OJg-V7-zio" secondAttribute="centerX" id="acc-zA-N01"/>
+                            <constraint firstItem="Rpl-nU-vgh" firstAttribute="centerX" secondItem="IRv-2b-3wn" secondAttribute="centerX" id="eGw-hW-0WX"/>
+                            <constraint firstItem="Rpl-nU-vgh" firstAttribute="centerX" secondItem="nP9-cm-SAC" secondAttribute="centerX" id="iSi-3B-ivd"/>
+                            <constraint firstItem="Rpl-nU-vgh" firstAttribute="trailing" secondItem="Uzc-TW-HLj" secondAttribute="trailing" id="nJW-7B-ffI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="OJg-V7-zio" secondAttribute="bottom" constant="20" id="oMv-qN-N5t"/>
+                            <constraint firstItem="OJg-V7-zio" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="41" id="p5c-vP-dcv"/>
+                            <constraint firstItem="Rpl-nU-vgh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="t5F-Lc-dM3"/>
+                            <constraint firstItem="evq-ne-EPx" firstAttribute="top" secondItem="nP9-cm-SAC" secondAttribute="bottom" constant="49" id="tTc-6v-LlT"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="PWy-Qj-BNG"/>
                     <connections>

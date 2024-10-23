@@ -227,6 +227,15 @@ extension ViewControllerPD: MotionDelegate {
             if self.numStepsGoal > 0 {
                 let progress = Float(todayTotalSteps) / self.numStepsGoal
                 self.progressBar.progress = min(progress, 1.0) // Ensure progress doesn't exceed 1.0
+                if self.progressBar.progress <= 0.25  {
+                    self.progressBar.progressTintColor = .red
+                } else if self.progressBar.progress <= 0.75{
+                    self.progressBar.progressTintColor = .orange
+                } else if self.progressBar.progress <= 1.0{
+                    self.progressBar.progressTintColor = .blue
+                } else if self.progressBar.progress == 1.0{
+                    self.progressBar.progressTintColor = .green
+                }
 
                 // Update steps remaining
                 let stepsRemaining = max(0, Int(self.numStepsGoal) - todayTotalSteps)
