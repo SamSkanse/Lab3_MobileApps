@@ -19,12 +19,13 @@ class ViewControllerPD: UIViewController, UITextFieldDelegate {
     let userDefaults = UserDefaults.standard
     var numStepsGoal: Float = 0.0
     var stepsYesterday: Int = 0
+    var stepsToday: Int = 0 // New variable to store steps today
     var didMeetGoalYesterday: Bool = false
 
     // Variables for activity detection sensitivity
     var lastActivityType: String?
     var activityUpdateTimestamp: Date?
-    let activityMinDuration: TimeInterval = 1.0 // Minimum duration to confirm activity
+    let activityMinDuration: TimeInterval = 0.25 // Minimum duration to confirm activity
 
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
@@ -47,6 +48,9 @@ class ViewControllerPD: UIViewController, UITextFieldDelegate {
         // Add tap gesture recognizer to dismiss keyboard
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         self.view.addGestureRecognizer(tapGesture)
+
+        // Initialize stepsToday to 0
+        self.stepsToday = 0
 
         // Start motion updates
         self.motionModel.delegate = self
@@ -86,6 +90,9 @@ class ViewControllerPD: UIViewController, UITextFieldDelegate {
             // Re-evaluate if the goal was met with the new goal
             checkIfGoalMet()
             updateGameAccess()
+
+            // Update progress bar and steps remaining
+            updateProgressBarAndStepsRemaining()
         } else {
             print("Not a valid input")
             // Optionally, display an alert to the user
@@ -97,6 +104,34 @@ class ViewControllerPD: UIViewController, UITextFieldDelegate {
 
     @IBAction func setGoalButton(_ sender: UIButton) {
         setGoal()
+    }
+
+    // MARK: - Update Progress Bar and Steps Remaining
+    func updateProgressBarAndStepsRemaining() {
+        // Update progress bar safely
+        if self.numStepsGoal > 0 {
+            let progress = Float(self.stepsToday) / self.numStepsGoal
+            self.progressBar.progress = min(progress, 1.0) // Ensure progress doesn't exceed 1.0
+
+            // Update progress bar color based on progress
+            if self.progressBar.progress <= 0.25 {
+                self.progressBar.progressTintColor = .red
+            } else if self.progressBar.progress <= 0.75 {
+                self.progressBar.progressTintColor = .orange
+            } else if self.progressBar.progress < 1.0 {
+                self.progressBar.progressTintColor = .blue
+            } else if self.progressBar.progress >= 1.0 {
+                self.progressBar.progressTintColor = .green
+            }
+
+            // Update steps remaining
+            let stepsRemaining = max(0, Int(self.numStepsGoal) - self.stepsToday)
+            self.stepsRemainingLabel.text = "Steps Remaining: \(stepsRemaining)"
+        } else {
+            self.progressBar.progress = 0.0
+            self.progressBar.progressTintColor = .red // Default color when no goal is set
+            self.stepsRemainingLabel.text = "Set a goal to track progress"
+        }
     }
 
     // MARK: - Query Steps from Yesterday
@@ -220,30 +255,13 @@ extension ViewControllerPD: MotionDelegate {
     func pedometerUpdated(pedData: CMPedometerData) {
         DispatchQueue.main.async {
             let todayTotalSteps = pedData.numberOfSteps.intValue
+            self.stepsToday = todayTotalSteps // Store current steps today
+
             // Update steps today label
             self.stepsTodayLabel.text = "Steps Today: \(todayTotalSteps)"
 
-            // Update progress bar safely
-            if self.numStepsGoal > 0 {
-                let progress = Float(todayTotalSteps) / self.numStepsGoal
-                self.progressBar.progress = min(progress, 1.0) // Ensure progress doesn't exceed 1.0
-                if self.progressBar.progress <= 0.25  {
-                    self.progressBar.progressTintColor = .red
-                } else if self.progressBar.progress <= 0.75{
-                    self.progressBar.progressTintColor = .orange
-                } else if self.progressBar.progress <= 1.0{
-                    self.progressBar.progressTintColor = .blue
-                } else if self.progressBar.progress == 1.0{
-                    self.progressBar.progressTintColor = .green
-                }
-
-                // Update steps remaining
-                let stepsRemaining = max(0, Int(self.numStepsGoal) - todayTotalSteps)
-                self.stepsRemainingLabel.text = "Steps Remaining: \(stepsRemaining)"
-            } else {
-                self.progressBar.progress = 0.0
-                self.stepsRemainingLabel.text = "Set a goal to track progress"
-            }
+            // Update progress bar and steps remaining
+            self.updateProgressBarAndStepsRemaining()
         }
     }
 

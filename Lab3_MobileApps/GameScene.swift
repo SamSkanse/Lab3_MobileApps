@@ -1,5 +1,5 @@
 //
-//  GameViewController.swift
+//  GameScene.swift
 //  Lab3_MobileApps
 //
 //  Created by Keaton Harvey on 10/21/24.
@@ -10,11 +10,11 @@ import SpriteKit
 import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    
+
     // MARK: - Motion Property
     let motionManager = CMMotionManager()
-    let userDefaults = UserDefaults.standard // Added UserDefaults access
-    
+    let userDefaults = UserDefaults.standard // Access to UserDefaults
+
     // MARK: - Spaceship and Asteroid Properties
     let spaceship = SKSpriteNode(imageNamed: "Spaceship")
     var livesLabel = SKLabelNode(fontNamed: "Chalkduster")
@@ -24,51 +24,51 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var survivalTime: TimeInterval = 0
     var startTime: TimeInterval = 0
     var highScore: TimeInterval = 0
-    
+
     // Categories for collision detection
     let spaceshipCategory: UInt32 = 0x1 << 0
     let asteroidCategory: UInt32 = 0x1 << 1
-    
+
     // Safe area insets
     var safeAreaInsets = UIEdgeInsets.zero
-    
+
     // MARK: - View Hierarchy Functions
     override func didMove(to view: SKView) {
         // Delegate for contact detection
         physicsWorld.contactDelegate = self
-        
+
         backgroundColor = SKColor.black
-        
+
         // Get safe area insets
         if let view = self.view {
             safeAreaInsets = view.safeAreaInsets
         }
-        
+
         // Start motion updates
         startMotionUpdates()
-        
+
         // Set up spaceship
         setupSpaceship()
-        
+
         // Set up labels
         setupLabels()
-        
+
         // Adjust for safe area
         adjustForSafeArea()
-        
+
         // Calculate lives based on steps
         calculateLivesBasedOnSteps()
-        
+
         // Load high score
         loadHighScore()
-        
+
         // Start survival timer
         startTime = CACurrentMediaTime()
-        
+
         // Start dynamic asteroid generation
         scheduleNextAsteroidSpawn()
     }
-    
+
     // MARK: - Setup Functions
     func setupSpaceship() {
         spaceship.size = CGSize(width: size.width * 0.1, height: size.height * 0.1)
@@ -123,31 +123,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func calculateLivesBasedOnSteps() {
         lives = 1 // Start with 1 life
 
-        let numStepsGoal = userDefaults.float(forKey: "numStepsGoal")
         let stepsYesterday = userDefaults.integer(forKey: "stepsYesterday")
 
-        if numStepsGoal > 0 && Float(stepsYesterday) >= numStepsGoal {
-            let extraLives = Int(floor(numStepsGoal / 2500.0))
-            lives += extraLives
-        }
+        // For every 2,500 steps taken yesterday, add an extra life
+        let extraLives = stepsYesterday / 2500
+        lives += extraLives
 
         livesLabel.text = "Lives: \(lives)"
     }
 
     func loadHighScore() {
-        highScore = UserDefaults.standard.double(forKey: "highScore")
+        highScore = userDefaults.double(forKey: "highScore")
         highScoreLabel.text = "High Score: \(String(format: "%.1f", highScore))s"
     }
 
     func saveHighScore() {
-        UserDefaults.standard.set(highScore, forKey: "highScore")
+        userDefaults.set(highScore, forKey: "highScore")
     }
 
     // MARK: - Asteroid Functions
     func scheduleNextAsteroidSpawn() {
         // Calculate the spawn delay based on survival time
         let spawnDelay = calculateSpawnDelay()
-        
+
         let waitAction = SKAction.wait(forDuration: spawnDelay)
         let spawnAction = SKAction.run { [weak self] in
             self?.spawnAsteroid()
@@ -156,11 +154,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let sequence = SKAction.sequence([waitAction, spawnAction])
         run(sequence, withKey: "asteroidSpawn")
     }
-    
+
     func calculateSpawnDelay() -> TimeInterval {
         // Define minimum and maximum spawn intervals
         let minSpawnInterval: TimeInterval = 0.1  // Minimum delay between spawns
-        let maxSpawnInterval: TimeInterval = 1.5 // slower initial spawn rate
+        let maxSpawnInterval: TimeInterval = 1.5 // Slower initial spawn rate
 
         // Define how quickly the spawn rate should increase
         let timeToReachMinInterval: TimeInterval = 120.0  // Time in seconds to reach minimum interval
@@ -174,7 +172,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         return currentSpawnInterval
     }
-    
+
     func spawnAsteroid() {
         let asteroid = SKSpriteNode(imageNamed: "Asteroid")
         asteroid.size = CGSize(width: size.width * 0.1, height: size.height * 0.1)
@@ -243,7 +241,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameOver()
         }
     }
-    
+
     func flashLivesLabel() {
         // Change the font color to red
         let turnRedAction = SKAction.run { [weak self] in
@@ -368,6 +366,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Reset variables
         survivalTime = 0
         startTime = CACurrentMediaTime()
+        lives = 1
 
         // Re-add the spaceship
         setupSpaceship()
