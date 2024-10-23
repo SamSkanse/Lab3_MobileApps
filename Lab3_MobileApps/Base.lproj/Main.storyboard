@@ -39,7 +39,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Game"/>
                                 <connections>
-                                    <segue destination="OB0-5u-w3R" kind="show" id="yWI-U9-9RR"/>
+                                    <segue destination="OB0-5u-w3R" kind="show" identifier="showGameSegue" id="ncq-54-gwy"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Steps Today" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ek2-Xc-xXn">
