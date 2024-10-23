@@ -89,6 +89,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Steps Remaining:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xbz-Sq-c8N">
+                                <rect key="frame" x="93" y="534" width="207" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -97,8 +104,10 @@
                     <connections>
                         <outlet property="activityLabel" destination="Rpl-nU-vgh" id="7EQ-hP-0BK"/>
                         <outlet property="goalLabel" destination="IRv-2b-3wn" id="EPS-a9-OUb"/>
+                        <outlet property="playGameButton" destination="OJg-V7-zio" id="nCH-kd-HB2"/>
                         <outlet property="progressBar" destination="Y5D-ZP-NTU" id="1gu-q6-BDT"/>
                         <outlet property="settableStepsGoal" destination="evq-ne-EPx" id="vLa-rp-ggs"/>
+                        <outlet property="stepsRemainingLabel" destination="xbz-Sq-c8N" id="RBa-zp-tda"/>
                         <outlet property="stepsTodayLabel" destination="ek2-Xc-xXn" id="B4u-k0-DHC"/>
                         <outlet property="stepsYesterdayLabel" destination="nP9-cm-SAC" id="xbw-0m-afc"/>
                     </connections>

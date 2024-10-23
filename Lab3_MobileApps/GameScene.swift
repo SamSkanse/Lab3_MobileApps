@@ -1,8 +1,8 @@
 //
-//  GameScene.swift
-//  AsteroidAvoidanceGame
+//  GameViewController.swift
+//  Lab3_MobileApps
 //
-//  Created by Your Name on Date.
+//  Created by Keaton Harvey on 10/21/24.
 //
 
 import UIKit
@@ -13,6 +13,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: - Motion Property
     let motionManager = CMMotionManager()
+    let userDefaults = UserDefaults.standard // Added UserDefaults access
     
     // MARK: - Spaceship and Asteroid Properties
     let spaceship = SKSpriteNode(imageNamed: "Spaceship")
@@ -20,7 +21,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var timerLabel = SKLabelNode(fontNamed: "Chalkduster")
     var highScoreLabel = SKLabelNode(fontNamed: "Chalkduster")
     var lives: Int = 1
-    var stepsYesterday: Int = 0 // This should be set before presenting the scene
     var survivalTime: TimeInterval = 0
     var startTime: TimeInterval = 0
     var highScore: TimeInterval = 0
@@ -56,9 +56,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Adjust for safe area
         adjustForSafeArea()
         
-        // Start dynamic asteroid generation
-        scheduleNextAsteroidSpawn()
-        
         // Calculate lives based on steps
         calculateLivesBasedOnSteps()
         
@@ -67,6 +64,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Start survival timer
         startTime = CACurrentMediaTime()
+        
+        // Start dynamic asteroid generation
+        scheduleNextAsteroidSpawn()
     }
     
     // MARK: - Setup Functions
@@ -116,14 +116,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         // Adjust labels' positions
         livesLabel.position = CGPoint(x: frame.minX + safeAreaInsets.left + 20, y: labelsYPosition)
-        timerLabel.position = CGPoint(x: frame.midX, y: labelsYPosition-80)
+        timerLabel.position = CGPoint(x: frame.midX, y: labelsYPosition - 80)
         highScoreLabel.position = CGPoint(x: frame.maxX - safeAreaInsets.right - 20, y: labelsYPosition)
     }
 
     func calculateLivesBasedOnSteps() {
-        // For every 2,500 steps, add 1 life
-        let extraLives = stepsYesterday / 2500
-        lives += extraLives
+        lives = 1 // Start with 1 life
+
+        let numStepsGoal = userDefaults.float(forKey: "numStepsGoal")
+        let stepsYesterday = userDefaults.integer(forKey: "stepsYesterday")
+
+        if numStepsGoal > 0 && Float(stepsYesterday) >= numStepsGoal {
+            let extraLives = Int(floor(numStepsGoal / 2500.0))
+            lives += extraLives
+        }
+
         livesLabel.text = "Lives: \(lives)"
     }
 
@@ -152,11 +159,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func calculateSpawnDelay() -> TimeInterval {
         // Define minimum and maximum spawn intervals
-        let minSpawnInterval: TimeInterval = 0.5  // Minimum delay between spawns
-        let maxSpawnInterval: TimeInterval = 1.5  // Faster initial spawn rate
+        let minSpawnInterval: TimeInterval = 0.25  // Minimum delay between spawns
+        let maxSpawnInterval: TimeInterval = 1.25  // Faster initial spawn rate
 
         // Define how quickly the spawn rate should increase
-        let timeToReachMinInterval: TimeInterval = 30.0  // Time in seconds to reach minimum interval
+        let timeToReachMinInterval: TimeInterval = 35.0  // Time in seconds to reach minimum interval
 
         // Calculate the proportion of time elapsed
         let timeElapsed = survivalTime
@@ -195,8 +202,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func calculateAsteroidSpeed() -> TimeInterval {
         // Define minimum and maximum durations for asteroid movement
-        let minDuration: TimeInterval = 1.5  // Faster asteroids
-        let maxDuration: TimeInterval = 4.0  // Slower asteroids at the start
+        let minDuration: TimeInterval = 0.5 // Faster asteroids
+        let maxDuration: TimeInterval = 7.0  // Slower asteroids at the start
 
         // Define how quickly the asteroid speed increases
         let timeToReachMinDuration: TimeInterval = 60.0  // Time in seconds to reach minimum duration
@@ -227,9 +234,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lives -= 1
         livesLabel.text = "Lives: \(lives)"
 
+        if lives > 0 {
+            // Flash the lives label red for 2 seconds
+            flashLivesLabel()
+        }
+
         if lives <= 0 {
             gameOver()
         }
+    }
+    
+    func flashLivesLabel() {
+        // Change the font color to red
+        let turnRedAction = SKAction.run { [weak self] in
+            self?.livesLabel.fontColor = SKColor.red
+        }
+
+        // Wait for 2 seconds
+        let waitAction = SKAction.wait(forDuration: 2.0)
+
+        // Change the font color back to white
+        let turnWhiteAction = SKAction.run { [weak self] in
+            self?.livesLabel.fontColor = SKColor.white
+        }
+
+        // Create the sequence
+        let sequence = SKAction.sequence([turnRedAction, waitAction, turnWhiteAction])
+
+        // Run the action on the livesLabel
+        livesLabel.run(sequence)
     }
 
     func gameOver() {
@@ -239,11 +272,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Remove asteroid spawn action
         removeAction(forKey: "asteroidSpawn")
 
+        var isNewHighScore = false
+
         // Check if new high score
         if survivalTime > highScore {
             highScore = survivalTime
             saveHighScore()
             highScoreLabel.text = "High Score: \(String(format: "%.1f", highScore))s"
+            isNewHighScore = true
         }
 
         // Show Game Over message
@@ -255,7 +291,102 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameOverLabel.zPosition = 2
         addChild(gameOverLabel)
 
-        // Optionally, add a restart button or transition to a Game Over scene
+        // Show New High Score message if applicable
+        if isNewHighScore {
+            let newHighScoreLabel = SKLabelNode(fontNamed: "Chalkduster")
+            newHighScoreLabel.text = "New High Score!"
+            newHighScoreLabel.fontSize = 40
+            newHighScoreLabel.fontColor = SKColor.yellow
+            newHighScoreLabel.position = CGPoint(x: size.width / 2, y: gameOverLabel.position.y + 60)
+            newHighScoreLabel.zPosition = 2
+            addChild(newHighScoreLabel)
+        }
+
+        // Add Reset High Score button
+        let resetHighScoreLabel = SKLabelNode(fontNamed: "Chalkduster")
+        resetHighScoreLabel.text = "Reset High Score"
+        resetHighScoreLabel.fontSize = 30
+        resetHighScoreLabel.fontColor = SKColor.white
+        resetHighScoreLabel.position = CGPoint(x: size.width / 2, y: gameOverLabel.position.y - 70)
+        resetHighScoreLabel.zPosition = 2
+        resetHighScoreLabel.name = "resetHighScoreButton" // Assign a name to identify it in touches
+        addChild(resetHighScoreLabel)
+
+        // Add Restart button
+        let restartLabel = SKLabelNode(fontNamed: "Chalkduster")
+        restartLabel.text = "Restart"
+        restartLabel.fontSize = 30
+        restartLabel.fontColor = SKColor.white
+        restartLabel.position = CGPoint(x: size.width / 2, y: gameOverLabel.position.y - 120)
+        restartLabel.zPosition = 2
+        restartLabel.name = "restartButton"
+        addChild(restartLabel)
+    }
+
+    // MARK: - Touch Handling
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        let location = touch.location(in: self)
+        let nodesAtPoint = nodes(at: location)
+
+        for node in nodesAtPoint {
+            if node.name == "resetHighScoreButton" {
+                resetHighScore()
+            } else if node.name == "restartButton" {
+                restartGame()
+            }
+        }
+    }
+
+    func resetHighScore() {
+        // Reset the high score
+        highScore = 0
+        saveHighScore()
+        highScoreLabel.text = "High Score: 0.0s"
+
+        // Provide feedback to the user
+        let resetConfirmationLabel = SKLabelNode(fontNamed: "Chalkduster")
+        resetConfirmationLabel.text = "High Score Reset!"
+        resetConfirmationLabel.fontSize = 30
+        resetConfirmationLabel.fontColor = SKColor.yellow
+        resetConfirmationLabel.position = CGPoint(x: size.width / 2, y: size.height / 2 - 160)
+        resetConfirmationLabel.zPosition = 2
+        addChild(resetConfirmationLabel)
+
+        // Remove the confirmation message after a delay
+        let waitAction = SKAction.wait(forDuration: 2.0)
+        let fadeOutAction = SKAction.fadeOut(withDuration: 1.0)
+        let removeAction = SKAction.removeFromParent()
+        resetConfirmationLabel.run(SKAction.sequence([waitAction, fadeOutAction, removeAction]))
+    }
+
+    func restartGame() {
+        // Remove all children and actions
+        removeAllChildren()
+        removeAllActions()
+
+        // Reset variables
+        survivalTime = 0
+        startTime = CACurrentMediaTime()
+
+        // Re-add the spaceship
+        setupSpaceship()
+
+        // Re-add labels
+        setupLabels()
+        adjustForSafeArea()
+
+        // Recalculate lives based on steps
+        calculateLivesBasedOnSteps()
+
+        // Start motion updates
+        startMotionUpdates()
+
+        // Start asteroid generation
+        scheduleNextAsteroidSpawn()
+
+        // Resume the game
+        isPaused = false
     }
 
     // MARK: - Update Loop
