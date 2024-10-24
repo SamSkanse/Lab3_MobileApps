@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Custom Navigation Controller-->
         <scene sceneID="V5u-Bl-mbU">
             <objects>
-                <navigationController id="OYN-f2-GWs" sceneMemberID="viewController">
+                <navigationController id="OYN-f2-GWs" customClass="CustomNavigationController" customModule="Lab3_MobileApps" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ydJ-EB-poV">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

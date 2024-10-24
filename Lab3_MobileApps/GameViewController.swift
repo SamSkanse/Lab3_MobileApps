@@ -10,6 +10,14 @@ import UIKit
 import SpriteKit
 
 class GameViewController: UIViewController {
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+            return .portrait
+        }
+
+    override var shouldAutorotate: Bool {
+            return false
+        }
 
     
     

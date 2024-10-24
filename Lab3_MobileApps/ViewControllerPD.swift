@@ -3,6 +3,14 @@ import UIKit
 import CoreMotion
 
 class ViewControllerPD: UIViewController, UITextFieldDelegate {
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+            return [.portrait, .landscapeLeft, .landscapeRight]
+        }
+
+        override var shouldAutorotate: Bool {
+            return true
+        }
 
     let motionModel = MotionModel()
 
